@@ -1,11 +1,13 @@
 %% Oral Exam Adaptive -- Albin Remäng -- 2015/2016
+clearvars;
+clc;
 
 % General parameters
 s = tf('s');
 Z_p = s+1;
 R_p = s^2-5*s+6;
 G = Z_p/R_p;
-Aug = (s+10);
+Aug = (s+0.5);
 Z_m = 1*Aug;        % Augmenterad med cancellerande pooler
 R_m = (s+1)*Aug;
 M = Z_m/R_m;
@@ -14,7 +16,7 @@ n = 2;              % Order of the plant
 
 %% Init values for the integrators
 x_m_init = zeros(n,1);     % Init for the reference states
-x_p_init = zeros(n,1);     % Init for the plant states
+x_p_init = zeros(2,1);     % Init for the plant states
 phi_1_init = zeros(n-1,1);
 phi_2_init = zeros(n-1,1);
 param_init = zeros(2*n,1);
@@ -38,7 +40,7 @@ C_p = sys_G.C;
 D_p = sys_G.D;
 
 sys_M = ss(M);
-a_m = sys_M.A;
-b_m = sys_M.B;
-c_m = sys_M.C;
-d_m = sys_M.D;
+A_m = sys_M.A;
+B_m = sys_M.B;
+C_m = sys_M.C;
+D_m = sys_M.D;
